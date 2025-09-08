@@ -1,3 +1,8 @@
+using PlatformShop.Application.Contracts;
+using PlatformShop.Application.Services;
+using PlatformShop.Domain.Repositories;
+using PlatformShop.Persistence.Repositories.Categories;
+
 
 namespace ShopdbApp.Api
 {
@@ -8,6 +13,14 @@ namespace ShopdbApp.Api
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
+
+            //registrar el dbcontext.
+
+            //Repositorios de datos.
+            builder.Services.AddScoped<ICategoriesRepository, CategoryRepository>();
+
+            //Servicios de aplicacion.
+            builder.Services.AddScoped<ICategoryService, CategoryService>();
 
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
