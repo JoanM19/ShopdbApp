@@ -1,11 +1,14 @@
-﻿using PlatformShop.Domain.Entities;
+﻿
+using PlatformShop.Domain.Models;
 using PlatformShop.Domain.Base;
 using PlatformShop.Domain.Models.Categories;
 
-namespace PlatformShop.Domain.Repositories
+namespace PlatformShop.Application.Contracts
 {
-    public interface ICategoriesRepository
+    public interface ICategoryService
     {
+        Task<OperationResult<CategoriesGetModel>> GetCategory();
+
         Task<OperationResult<List<CategoriesGetModel>>> GetAllCategoriesAsync();
         Task<OperationResult<CategoriesGetModel>> GetCategoriesByIdAsync(int id);
         Task<OperationResult<CategoriesCreateModel>> CreateCategoriesAsync(CategoriesGetModel model);

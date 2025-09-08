@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PlatformShop.Domain.Base
 {
-    class OperationResult<TModel>
+    public class OperationResult<TModel>
     {
         public bool IsSuccess { get; set; }
         public string Message { get; set; } = string.Empty;

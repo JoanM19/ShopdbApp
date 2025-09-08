@@ -5,8 +5,8 @@ namespace PlatformShop.Domain.Models.Categories
     {
         public int CategoryID { get; set; }
        
-        public DateTime Creation_Date { get; set; }
+        public DateTime CreationDate { get; set; }
 
-        public int Creation_User { get; set; }
+        public int CreationUser { get; set; }
     }
 }

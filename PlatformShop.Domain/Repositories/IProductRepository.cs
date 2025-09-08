@@ -1,10 +1,10 @@
-﻿
+﻿using PlatformShop.Domain.Entities;
 using PlatformShop.Domain.Base;
 using PlatformShop.Domain.Models.Products;
 
 namespace PlatformShop.Domain.Repositories
 {
-    interface IProductsRepository
+    public interface IProductRepository 
     {
         Task<OperationResult<List<ProductsGetModel>>> GetAllProductsAsync();
         Task<OperationResult<ProductsGetModel>> GetProductByIdAsync(int id);

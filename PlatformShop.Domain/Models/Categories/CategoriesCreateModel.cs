@@ -2,7 +2,7 @@
 
 namespace PlatformShop.Domain.Models.Categories
 {
-    public record CategoriesCreateModel : CategoriesGetModel
+    public record CategoriesCreateModel : CategoriesModel
     {
        
         public DateTime CreationDate { get; set; }

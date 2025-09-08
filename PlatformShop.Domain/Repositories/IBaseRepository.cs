@@ -3,7 +3,7 @@
 
 namespace PlatformShop.Domain.Repositories
 {
-    interface IBaseRepository<TEintity, TModel> where TEintity : class
+    public interface IBaseRepository<TEintity, TModel> where TEintity : class
     {
         Task<OperationResult<TModel>> GetAllAsync();
         Task<TModel> GetByIdAsync(int id);
