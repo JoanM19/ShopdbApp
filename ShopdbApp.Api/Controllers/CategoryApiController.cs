@@ -22,9 +22,11 @@ namespace ShopdbApp.Api.Controllers
         [HttpGet("InsertarCategoria")]
         public async Task<IActionResult> Get()
         {
+            // Map CategoriesCreateModel to CategoriesGetModel before passing it to the service
+
             var result = await _categoriesService.GetAllCategoriesAsync();
-            
-            if(!result.IsSuccess)
+
+            if (!result.IsSuccess)
             {
                 return BadRequest(result);
             }
@@ -33,23 +35,18 @@ namespace ShopdbApp.Api.Controllers
 
         // GET api/<CategoryController>/5
         [HttpGet("")]
-        public void  Get(int id)
+        public void Get(int id)
         {
 
         }
 
         // Updated the method to fix the type mismatch issue in the CreateCategoriesAsync call.
         [HttpPost("Guardar")]
-        public async Task<IActionResult> Post([FromBody] CategoriesCreateModel createcategory)
+        public async Task<IActionResult> Post([FromBody] CategoriesCreateModel createModel)
         {
-            // Map CategoriesCreateModel to CategoriesGetModel before passing it to the service
-            var categoryGetModel = new CategoriesGetModel
-            {
-                CategoryName = createcategory.CategoryName,
-                Description = createcategory.Description
-            };
-
-            var result = await _categoriesService.CreateCategoriesAsync(categoryGetModel);
+            
+            // Updated to pass the correct type (CategoriesGetModel) to CreateCategoriesAsync
+            var result = await _categoriesService.CreateCategoriesAsync(createModel);
 
             if (!result.IsSuccess)
             {

@@ -14,7 +14,7 @@ namespace PlatformShop.Application.Services
             _categoriesRepository = categoriesRepository;
         }
 
-        public async Task<OperationResult<CategoriesCreateModel>> CreateCategoriesAsync(CategoriesGetModel model)
+        public async Task<OperationResult<CategoriesUpdateModel>> CreateCategoriesAsync(CategoriesCreateModel model)
         {
             return await _categoriesRepository.CreateCategoriesAsync(model);
         }
@@ -43,6 +43,6 @@ namespace PlatformShop.Application.Services
             throw new NotImplementedException();
         }
 
-        
+      
     }
 }

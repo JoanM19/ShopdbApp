@@ -16,8 +16,4 @@
     <ProjectReference Include="..\PlatformShop.Domain\PlatformShop.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Validitions\" />
-  </ItemGroup>
-
 </Project>

@@ -23,22 +23,58 @@ namespace PlatformShop.Persistence.Repositories.Categories
         {
             _configuration = configuration;
             _logger = logger;
-            _connectionString = _configuration.GetConnectionString("Data Source=LAPTOP-RPA9Q7BD\\SQLEXPRESS04;Initial Catalog=ShopDbApp;Integrated Security=True");
+            _connectionString = _configuration.GetConnectionString("ShopDbApp");
         }
 
-        public async Task<OperationResult<CategoriesCreateModel>> CreateCategoriesAsync(CategoriesGetModel model)
+        public async Task<OperationResult<CategoriesUpdateModel>> CreateCategoriesAsync(CategoriesCreateModel model)
         {
-            OperationResult<CategoriesCreateModel> result = new OperationResult<CategoriesCreateModel>();
+            OperationResult<CategoriesUpdateModel> result = new OperationResult<CategoriesUpdateModel>();
 
             try
             {
                 if (model == null)
                 {
-                    return OperationResult<CategoriesCreateModel>.Failure("The Category model is null.");
+                    return OperationResult<CategoriesUpdateModel>.Failure("The Category model is null.");
                 }
                 if (string.IsNullOrEmpty(model.CategoryName) || string.IsNullOrWhiteSpace(model.CategoryName))
                 {
-                    return OperationResult<CategoriesCreateModel>.Failure("The Category name is required.");
+                    return OperationResult<CategoriesUpdateModel>.Failure("The Category name is required.");
+                }
+                if (model.CreationUser <= 0)
+                {
+                    return OperationResult<CategoriesUpdateModel>.Failure("The CreationUser is required and must be greater than zero.");
+                }
+                if (model.CreationDate == DateTime.MinValue)
+                {
+                    return OperationResult<CategoriesUpdateModel>.Failure("The CreationDate is required and must be a valid date.");
+                }
+                if (model.Description != null && model.Description.Length > 500)
+                {
+                    return OperationResult<CategoriesUpdateModel>.Failure("The Description cannot exceed 500 characters.");
+                }
+                if (model.CategoryName.Length > 100)
+                {
+                    return OperationResult<CategoriesUpdateModel>.Failure("The Category name cannot exceed 100 characters.");
+                }
+                if (model.CategoryName.Length < 3)
+                {
+                    return OperationResult<CategoriesUpdateModel>.Failure("The Category name must be at least 3 characters long.");
+                }
+                if (model.CategoryName.Any(char.IsDigit))
+                {
+                    return OperationResult<CategoriesUpdateModel>.Failure("The Category name cannot contain numbers.");
+                }
+                if (model.CategoryName.Any(char.IsSymbol))
+                {
+                    return OperationResult<CategoriesUpdateModel>.Failure("The Category name cannot contain special characters.");
+                }
+                if (model.CategoryName.Any(char.IsPunctuation))
+                {
+                    return OperationResult<CategoriesUpdateModel>.Failure("The Category name cannot contain punctuation characters.");
+                }
+                if (model.CategoryName.Any(char.IsWhiteSpace))
+                {
+                    return OperationResult<CategoriesUpdateModel>.Failure("The Category name cannot contain whitespace characters.");
                 }
 
                 _logger.LogInformation($"Creating a new category: {model.CategoryName}");
@@ -48,12 +84,13 @@ namespace PlatformShop.Persistence.Repositories.Categories
                     using (var command = new SqlCommand("[dbo].[InsertarCategoria]", connection))
                     {
                         command.CommandType = System.Data.CommandType.StoredProcedure;
-                        command.Parameters.AddWithValue("@CategoryName", model.CategoryName);
-                        command.Parameters.AddWithValue("@Description", model.Description ?? (object)DBNull.Value);
-                        command.Parameters.AddWithValue("@CreationDate", model.CreationDate);
-                        command.Parameters.AddWithValue("@CreationUser", model.CreationUser);
+                        command.Parameters.AddWithValue("@p_categoryname", model.CategoryName);
+                        command.Parameters.AddWithValue("@p_description", model.Description ?? (object)DBNull.Value);
+                        command.Parameters.AddWithValue("@p_creation_user", model.CreationUser);
+                        command.Parameters.AddWithValue("@p_creation_date", model.CreationDate);
+                        
 
-                        SqlParameter p_result = new SqlParameter("@p_result", System.Data.SqlDbType.Int)
+                        SqlParameter p_result = new SqlParameter("@p_result", System.Data.SqlDbType.NVarChar)
                         {
                             Size = 1000,
                             Direction = System.Data.ParameterDirection.Output
@@ -69,19 +106,19 @@ namespace PlatformShop.Persistence.Repositories.Categories
                         if (rowsAffected > 0)
                         {
                             _logger.LogInformation($"Category successfully: {model.CategoryName}. Result: {resultMessage}");
-                            var createdCategory = new CategoriesCreateModel
+                            var createdCategory = new CategoriesUpdateModel
                             {
                                 CategoryName = model.CategoryName,
                                 Description = model.Description,
-                                CreationDate = model.CreationDate,
-                                CreationUser = model.CreationUser
+                                Modified_Date = model.CreationDate,
+                                Modified_User = model.CreationUser
                             };
-                            result = OperationResult<CategoriesCreateModel>.Success("Category created successfully.", createdCategory);
+                            result = OperationResult<CategoriesUpdateModel>.Success("Category created successfully.", createdCategory);
                         }
                         else
                         {
                             _logger.LogWarning($"No rows affected while creating category: {model.CategoryName}. Result: {resultMessage}");
-                            result = OperationResult<CategoriesCreateModel>.Failure("Failed to create category.");
+                            result = OperationResult<CategoriesUpdateModel>.Failure("Failed to create category.");
                         }
                     }
                 }
@@ -89,7 +126,7 @@ namespace PlatformShop.Persistence.Repositories.Categories
             catch (Exception ex)
             {
                 _logger.LogError(ex, "An error occurred while creating a new category.");
-                return OperationResult<CategoriesCreateModel>.Failure("An error occurred while creating the category.");
+                return OperationResult<CategoriesUpdateModel>.Failure("An error occurred while creating the category.");
             }
 
             return result;
@@ -102,7 +139,7 @@ namespace PlatformShop.Persistence.Repositories.Categories
 
         public async Task<OperationResult<List<CategoriesGetModel>>> GetAllCategoriesAsync()
         {
-            OperationResult<List<CategoriesGetModel>> result; // Corrected the type to match the return type
+            OperationResult<List<CategoriesGetModel>> result = new OperationResult<List<CategoriesGetModel>>();
 
             try
             {

@@ -8,10 +8,11 @@ namespace PlatformShop.Domain.Repositories
     {
         Task<OperationResult<List<CategoriesGetModel>>> GetAllCategoriesAsync();
         Task<OperationResult<CategoriesGetModel>> GetCategoriesByIdAsync(int id);
-        Task<OperationResult<CategoriesCreateModel>> CreateCategoriesAsync(CategoriesGetModel model);
+        Task<OperationResult<CategoriesUpdateModel>> CreateCategoriesAsync(CategoriesCreateModel model);
 
         Task<OperationResult<CategoriesUpdateModel>> UpdateCategoriesAsync(int id, CategoriesGetModel model);
 
         Task<OperationResult<CategoriesDeleteModel>> DeleteCategoriesAsync(int id);
+        
     }
 }
