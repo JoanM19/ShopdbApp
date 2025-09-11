@@ -21,6 +21,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlatformShop.Domain", "Plat
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShopdbApp.Api", "ShopdbApp.Api\ShopdbApp.Api.csproj", "{93809CDF-0DFD-4467-A339-A4CBB0DA3196}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShopdbApp.Web", "ShopdbApp.Web\ShopdbApp.Web.csproj", "{E9216AC7-F4C2-4C6B-B232-4C3BE57613CC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -43,6 +45,10 @@ Global
 		{93809CDF-0DFD-4467-A339-A4CBB0DA3196}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{93809CDF-0DFD-4467-A339-A4CBB0DA3196}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{93809CDF-0DFD-4467-A339-A4CBB0DA3196}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E9216AC7-F4C2-4C6B-B232-4C3BE57613CC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E9216AC7-F4C2-4C6B-B232-4C3BE57613CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E9216AC7-F4C2-4C6B-B232-4C3BE57613CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E9216AC7-F4C2-4C6B-B232-4C3BE57613CC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -52,6 +58,7 @@ Global
 		{F7A35916-EF71-4FA3-B0DA-2C9F75BA97D8} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 		{CB6BB22F-BF02-4E50-A7A0-04EEFBB711C7} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 		{93809CDF-0DFD-4467-A339-A4CBB0DA3196} = {EFEBAFE9-D62B-456A-88FF-96E32C136DB6}
+		{E9216AC7-F4C2-4C6B-B232-4C3BE57613CC} = {6F778D2B-4AFA-4020-B6AD-A0566B2AD15E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E0B2C69D-5A1F-4715-9029-EC45794179AC}
