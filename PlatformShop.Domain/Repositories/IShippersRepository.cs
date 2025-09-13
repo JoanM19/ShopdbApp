@@ -5,7 +5,7 @@ using PlatformShop.Domain.Models.Shippers;
 
 namespace PlatformShop.Domain.Repositories
 {
-    interface IShippersRepository
+    public interface IShippersRepository
     {
         Task<OperationResult<List<ShippersGetModel>>> GetAllShippersAsync();
         Task<OperationResult<ShippersGetModel>> GetShipperByIdAsync(int id);

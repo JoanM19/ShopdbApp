@@ -4,7 +4,7 @@ using PlatformShop.Domain.Models.Employees;
 
 namespace PlatformShop.Domain.Repositories
 {
-    interface IEmployeesRepository
+    public interface IEmployeesRepository
     {
         Task<OperationResult<List<EmployeesGetModel>>> GetAllEmployeesAsync();
         Task<OperationResult<EmployeesGetModel>> GetEmployeesByIdAsync(int id);

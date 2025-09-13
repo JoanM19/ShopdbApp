@@ -4,7 +4,7 @@ using PlatformShop.Domain.Models.Suppliers;
 
 namespace PlatformShop.Domain.Repositories
 {
-    interface ISuppliersRepository
+    public interface ISuppliersRepository
     {
         Task<OperationResult<List<SuppliersGetModel>>> GetAllSuppliersAsync();
         Task<OperationResult<SuppliersGetModel>> GetSupplierByIdAsync(int id);

@@ -3,8 +3,8 @@
 
 namespace PlatformShop.Persistence.Validitions
 {
-    public class CategoryValidition 
+    public class CategoryValidition
     {
-
+        
     }
 }

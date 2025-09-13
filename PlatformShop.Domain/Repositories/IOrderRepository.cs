@@ -3,7 +3,7 @@ using PlatformShop.Domain.Models.Order;
 
 namespace PlatformShop.Domain.Repositories
 {
-    interface IOrderRepository
+    public interface IOrderRepository
     {
         Task<OperationResult<List<OrderGetModel>>> GetAllOrderAsync();
         Task<OperationResult<OrderGetModel>> GetOrderByIdAsync(int id);
