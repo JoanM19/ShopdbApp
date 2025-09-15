@@ -1,49 +1,41 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using PlatformShop.Application.Contracts;
-using PlatformShop.Domain.Models.Categories;
+using PlatformShop.Domain.Models.Shippers;
 
 namespace ShopdbApp.Web.Controllers
 {
-    public class CategoryController : Controller
+    public class ShippersController : Controller
     {
-        private readonly ICategoryService _categoriesService;
-
-        public CategoryController(ICategoryService categoryService)
+        private readonly IShippersService _shippersService;
+        public ShippersController(IShippersService shippersService)
         {
-            _categoriesService = categoryService;
+            _shippersService = shippersService;
         }
-        // GET: CategoryController
-        public async Task<IActionResult> Index()
+        // GET: ShippersController
+        public async Task<ActionResult> Index(int id, ShippersUpdateModel updateModel)
         {
-
-            var result = await _categoriesService.CreateCategoriesAsync(new CategoriesCreateModel
-            {
-                CategoryName = "New Category",
-                Description = "Description of the new category"
-            });
-
+            var result = await _shippersService.UpdateShipperAsync(id, updateModel);
             if (!result.IsSuccess)
             {
                 return ViewBag.Error = result.Message;
             }
-           
             return View(result.Data);
         }
 
-        // GET: CategoryController/Details/5
+        // GET: ShippersController/Details/5
         public ActionResult Details(int id)
         {
             return View();
         }
 
-        // GET: CategoryController/Create
+        // GET: ShippersController/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: CategoryController/Create
+        // POST: ShippersController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(IFormCollection collection)
@@ -58,13 +50,13 @@ namespace ShopdbApp.Web.Controllers
             }
         }
 
-        // GET: CategoryController/Edit/5
+        // GET: ShippersController/Edit/5
         public ActionResult Edit(int id)
         {
             return View();
         }
 
-        // POST: CategoryController/Edit/5
+        // POST: ShippersController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(int id, IFormCollection collection)
@@ -79,13 +71,13 @@ namespace ShopdbApp.Web.Controllers
             }
         }
 
-        // GET: CategoryController/Delete/5
+        // GET: ShippersController/Delete/5
         public ActionResult Delete(int id)
         {
             return View();
         }
 
-        // POST: CategoryController/Delete/5
+        // POST: ShippersController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id, IFormCollection collection)

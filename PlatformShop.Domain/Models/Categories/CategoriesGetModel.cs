@@ -7,6 +7,6 @@ namespace PlatformShop.Domain.Models.Categories
        
         public DateTime CreationDate { get; set; }
 
-        public int CreationUser { get; set; }
+        
     }
 }

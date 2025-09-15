@@ -3,6 +3,7 @@
 using Microsoft.Extensions.Logging;
 using PlatformShop.Application.Contracts;
 using PlatformShop.Domain.Base;
+using PlatformShop.Domain.Models.Categories;
 using PlatformShop.Domain.Models.Customers;
 using PlatformShop.Domain.Repositories;
 

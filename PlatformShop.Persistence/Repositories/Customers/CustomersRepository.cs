@@ -146,7 +146,7 @@ namespace PlatformShop.Persistence.Repositories.Customers
                 };
             }
             else
-            {
+            { 
                 return new OperationResult<CustomersGetModel>
             {
                 IsSuccess = customer != null,

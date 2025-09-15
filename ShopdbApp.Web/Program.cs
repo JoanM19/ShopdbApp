@@ -1,7 +1,12 @@
 using PlatformShop.Application.Contracts;
 using PlatformShop.Application.Services;
 using PlatformShop.Domain.Repositories;
+using PlatformShop.Persistence.Repositories.Base;
 using PlatformShop.Persistence.Repositories.Categories;
+using PlatformShop.Persistence.Repositories.Customers;
+using PlatformShop.Persistence.Repositories.Employees;
+using PlatformShop.Persistence.Repositories.Shippers;
+using PlatformShop.Persistence.Repositories.Suppliers;
 
 
 namespace ShopdbApp.Web
@@ -12,11 +17,22 @@ namespace ShopdbApp.Web
         {
             var builder = WebApplication.CreateBuilder(args);
 
+            builder.Services.AddScoped<IStoredProcedureExecutor, StoredProcedureExecutor>();
+
             //Repositorios de datos.
             builder.Services.AddScoped<ICategoriesRepository, CategoryRepository>();
+            builder.Services.AddScoped<ICustomersRepository, CustomersRepository>();
+            builder.Services.AddScoped<ISuppliersRepository, SuppliersRepository>();
+            builder.Services.AddScoped<IShippersRepository, ShippersRepository>();
+            builder.Services.AddScoped<IEmployeesRepository, EmployeesRepository>();
 
             //Servicios de aplicacion.
             builder.Services.AddScoped<ICategoryService, CategoryService>();
+            builder.Services.AddScoped<ICustomersService, CustomersService>();
+            builder.Services.AddScoped<ISupplierService, SupplierService>();
+            builder.Services.AddScoped<IShippersService, ShippersService>();
+            builder.Services.AddScoped<IEmployeesService, EmployeesService>();
+
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();

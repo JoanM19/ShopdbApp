@@ -1,4 +1,5 @@
 ﻿using PlatformShop.Domain.Base;
+using PlatformShop.Domain.Models.Categories;
 using PlatformShop.Domain.Models.Customers;
 
 namespace PlatformShop.Application.Contracts

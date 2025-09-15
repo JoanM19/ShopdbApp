@@ -34,7 +34,7 @@ namespace ShopdbApp.Api.Controllers
         }
 
         // GET api/<CategoryController>/5
-        [HttpGet("")]
+        [HttpGet("id")]
         public void Get(int id)
         {
 
@@ -60,12 +60,15 @@ namespace ShopdbApp.Api.Controllers
         public async Task<IActionResult> Put(int id, [FromBody] CategoriesUpdateModel categoriesUpdate)
         {
             // Map CategoriesUpdateModel to CategoriesGetModel before passing it to the service
-            var categoryGetModel = new CategoriesGetModel
-            {
-                CategoryName = categoriesUpdate.CategoryName,
-                Description = categoriesUpdate.Description
-            };
 
+            var categoryGetModel = new CategoriesUpdateModel
+            {
+                CategoryID = categoriesUpdate.CategoryID,
+                CategoryName = categoriesUpdate.CategoryName,
+                Description = categoriesUpdate.Description,
+                Modified_Date = categoriesUpdate.Modified_Date,
+                Modified_User = categoriesUpdate.Modified_User
+            };
             var result = await _categoriesService.UpdateCategoriesAsync(id, categoryGetModel);
 
             if (!result.IsSuccess)
@@ -77,8 +80,15 @@ namespace ShopdbApp.Api.Controllers
 
         // DELETE api/<CategoryController>/5
         [HttpDelete("Delete")]
-        public void Delete(int id)
+        public async Task<IActionResult> Delete(int id, CategoriesDeleteModel categoriesDelete)
         {
+            var result = await _categoriesService.DeleteCategoriesAsync(id, categoriesDelete);
+
+            if (!result.IsSuccess)
+            {
+                return BadRequest(result);
+            }
+            return Ok(result);
         }
     }
 }
