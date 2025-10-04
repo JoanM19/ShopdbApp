@@ -13,12 +13,13 @@ namespace PlatformShop.Persistence.Repositories.Base
     {
         private readonly string _connectionString;
         private readonly ILogger<StoredProcedureExecutor> _logger;
-        public StoredProcedureExecutor(IConfiguration connectionString, ILogger<StoredProcedureExecutor> logger)
+        public StoredProcedureExecutor(IConfiguration configuration, ILogger<StoredProcedureExecutor> logger)
         {
-            _connectionString = connectionString[""];
+            _connectionString = configuration.GetConnectionString("ShopDbApp")
+          ?? throw new InvalidOperationException("No se ha encontrado la cadena de conexión 'ShopDbApp'");
             _logger = logger;
         }
-        public async Task<int> ExecuteAsync(string storedProcedureName, Dictionary<string, object> parameters, SqlParameter? outputParam = null)
+        public async Task<int> ExecuteAsync(string storedProcedureName, Dictionary<string, object?> parameters, SqlParameter? outputParam = null)
         {
             using var connection = new SqlConnection(_connectionString);
             using var command = new SqlCommand(storedProcedureName, connection)
@@ -28,7 +29,8 @@ namespace PlatformShop.Persistence.Repositories.Base
 
             foreach (var param in parameters)
             {
-                command.Parameters.AddWithValue(param.Key, param.Value ?? DBNull.Value);
+                var value = param.Value ?? DBNull.Value; 
+                command.Parameters.AddWithValue(param.Key, value);
             }
             if (outputParam != null)
             {

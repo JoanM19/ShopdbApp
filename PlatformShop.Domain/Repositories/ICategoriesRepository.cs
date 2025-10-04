@@ -6,13 +6,11 @@ namespace PlatformShop.Domain.Repositories
 {
     public interface ICategoriesRepository
     {
+        Task<OperationResult<CategoriesCreateModel>> CreateCategoriesAsync(CategoriesCreateModel model);
+        Task<OperationResult<CategoriesDeleteModel>> DeleteCategoriesAsync(int id, CategoriesDeleteModel model);
         Task<OperationResult<List<CategoriesGetModel>>> GetAllCategoriesAsync();
         Task<OperationResult<CategoriesGetModel>> GetCategoriesByIdAsync(int id);
-        Task<OperationResult<CategoriesUpdateModel>> CreateCategoriesAsync(CategoriesCreateModel model);
+        Task<OperationResult<CategoriesUpdateModel>> UpdateCategoriesAsync(int id, CategoriesUpdateModel model);
 
-        Task<OperationResult<CategoriesUpdateModel>> UpdateCategoriesAsync(int id, CategoriesGetModel model);
-
-        Task<OperationResult<CategoriesDeleteModel>> DeleteCategoriesAsync(int id);
-        
     }
 }

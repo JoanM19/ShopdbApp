@@ -16,6 +16,6 @@ namespace PlatformShop.Domain.Models.Shippers
 
         public string? Postalcode { get; set; }
 
-        public int? Country { get; set; }
+        public string? Country { get; set; }
     }
 }

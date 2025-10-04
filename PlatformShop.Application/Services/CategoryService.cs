@@ -9,40 +9,36 @@ namespace PlatformShop.Application.Services
     public class CategoryService : ICategoryService
     {
         private readonly ICategoriesRepository _categoriesRepository;
+        private readonly ILogger<CategoryService> _logger;
         public CategoryService(ICategoriesRepository categoriesRepository, ILogger<CategoryService> logger)
         {
             _categoriesRepository = categoriesRepository;
+            _logger = logger;
         }
 
-        public async Task<OperationResult<CategoriesUpdateModel>> CreateCategoriesAsync(CategoriesCreateModel model)
+        public async Task<OperationResult<CategoriesCreateModel>> CreateCategoriesAsync(CategoriesCreateModel model)
         {
             return await _categoriesRepository.CreateCategoriesAsync(model);
         }
-        public async Task<OperationResult<CategoriesUpdateModel>> UpdateCategoriesAsync(int id, CategoriesGetModel model)
-        {
-            return await _categoriesRepository.UpdateCategoriesAsync(id, model);
-        }
 
-        public Task<OperationResult<CategoriesDeleteModel>> DeleteCategoriesAsync(int id)
+        public async Task<OperationResult<CategoriesDeleteModel>> DeleteCategoriesAsync(int id, CategoriesDeleteModel model)
         {
-            throw new NotImplementedException();
+            return await _categoriesRepository.DeleteCategoriesAsync(id, model);
         }
 
         public async Task<OperationResult<List<CategoriesGetModel>>> GetAllCategoriesAsync()
         {
-           return await _categoriesRepository.GetAllCategoriesAsync();
+            return await _categoriesRepository.GetAllCategoriesAsync();
         }
 
-        public Task<OperationResult<CategoriesGetModel>> GetCategoriesByIdAsync(int id)
+        public async Task<OperationResult<CategoriesGetModel>> GetCategoriesByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            return await _categoriesRepository.GetCategoriesByIdAsync(id);
         }
 
-        public Task<OperationResult<CategoriesGetModel>> GetCategory()
+        public async Task<OperationResult<CategoriesUpdateModel>> UpdateCategoriesAsync(int id, CategoriesUpdateModel model)
         {
-            throw new NotImplementedException();
+            return await _categoriesRepository.UpdateCategoriesAsync(id, model);
         }
-
-      
     }
 }

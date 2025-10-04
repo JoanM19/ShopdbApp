@@ -3,11 +3,11 @@ namespace PlatformShop.Domain.Models.Suppliers
 {
     public record SuppliersModel
     {
-        public string? Companyname { get; set; }
+        public string? CompanyName { get; set; }
 
-        public string? Contactname { get; set; }
+        public string? ContactName { get; set; }
 
-        public string? Contacttitle { get; set; }
+        public string? ContactTitle { get; set; }
 
         public string? Address { get; set; }
 
@@ -15,7 +15,7 @@ namespace PlatformShop.Domain.Models.Suppliers
 
         public string? Region { get; set; }
 
-        public string? Postalcode { get; set; }
+        public string? PostalCode { get; set; }
 
         public string? Country { get; set; }
 
